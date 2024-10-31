@@ -6,7 +6,6 @@ from Services.Services.ValidationService import ValidationService
 from Services.Services.SqsService import SqsService
 from Application.Models.Response.ErrorResponseModel import ErrorResponseModel
 from Application.Models.Request.PersonRequestModel import PersonRequestModel
-from Services.Models.WhatsAppModel import WhatsAppModel
 
 
 class PersonController:
@@ -34,7 +33,7 @@ class PersonController:
                 connection.commit()
 
                 is_sent = SqsService().send_message_to_sqs(
-                    WhatsAppModel(person_request.phone, person_request.image_ids), person_request.person_name)
+                    person_request.phone, person_request.person_name, person_request.image_ids)
                 if is_sent is False:
                     return jsonify(ErrorResponseModel(
                         Errors=["Não conseguimos enviar suas fotos. "

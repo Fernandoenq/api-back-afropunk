@@ -1,12 +1,12 @@
 import boto3
 import json
+from typing import List
 from Application.Configuration import Configuration
-from Services.Models.WhatsAppModel import WhatsAppModel
 
 
 class SqsService:
     @staticmethod
-    def send_message_to_sqs(whatsapp: WhatsAppModel, person_name: str) -> bool:
+    def send_message_to_sqs(phone: str, person_name: str, image_ids: List[str]) -> bool:
         sqs_client = boto3.client(
             "sqs",
             aws_access_key_id=Configuration.aws_access_key_id,
@@ -14,16 +14,23 @@ class SqsService:
             region_name=Configuration.region_name
         )
 
+        message_sqs = {
+            "origin": 2,
+            "phone": phone,
+            "message": "Aqui estão suas fotos",
+            "imageIds": image_ids
+        }
+
         response = sqs_client.send_message(
             QueueUrl=Configuration.sqs_queue_url,
-            MessageBody=json.dumps(whatsapp)
+            MessageBody=json.dumps(message_sqs)
         )
 
         if response.get('MessageId'):
-            print(f"Mensagem enviada com sucesso para {person_name} / {whatsapp.phone}."
+            print(f"Mensagem enviada com sucesso para {person_name} / {phone}."
                   f"ID da mensagem: {response['MessageId']}")
 
             return True
         else:
-            print(f"Falha ao enviar mensagem para {person_name} / {whatsapp.phone}.")
+            print(f"Falha ao enviar mensagem para {person_name} / {phone}.")
             return False

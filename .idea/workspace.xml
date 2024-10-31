@@ -5,32 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b73d1b5-0126-404d-b803-d98de7c454f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Application/Configuration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Constants.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Controllers/ImageController.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Controllers/PersonController.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Models/Request/PersonRequestModel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/Models/Response/ErrorResponseModel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Entities/Image.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Entities/Person.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Entities/Portfolio.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Repositories/pips.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Repositories/scripts-sql/script.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Models/Results/BaseResult.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Models/Results/ValidationResult.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Models/WhatsAppModel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Services/ConnectionService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Services/ImageService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Services/PersonService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Services/PortfolioService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Services/SqsService.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Services/ValidationService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/api-back-afropunk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/api-back-afropunk.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Controllers/PersonController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Controllers/PersonController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Models/Request/PersonRequestModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Models/Request/PersonRequestModel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/Models/WhatsAppModel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/Services/SqsService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services/SqsService.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
