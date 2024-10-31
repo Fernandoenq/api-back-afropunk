@@ -5,27 +5,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b73d1b5-0126-404d-b803-d98de7c454f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/api-back-afropunk.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Configuration.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Constants.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Controllers/ImageController.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Controllers/PersonController.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Models/Request/PersonRequestModel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/Models/Response/ErrorResponseModel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Entities/Image.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Entities/Person.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Domain/Entities/Portfolio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/pips.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Repositories/scripts-sql/script.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Models/Results/BaseResult.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Models/Results/ValidationResult.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Models/WhatsAppModel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Services/ConnectionService.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Services/ImageService.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Services/PersonService.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Services/PortfolioService.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Services/SqsService.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Services/ValidationService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/api-back-afropunk.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/api-back-afropunk.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2o8kO9GADaEn4LWRwbIFabhQalh" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,15 +61,48 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.app.executor": "Run",
+    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Juliano César/Documents/GitHub/api-back-afropunk/Application/main.py",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Juliano César\Documents\GitHub\api-back-afropunk\Domain\Entities" />
+      <recent name="C:\Users\Juliano César\Documents\GitHub\api-back-afropunk" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="api-back-afropunk" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.11" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Application/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-48aec45f0201-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.17011.127" />
+        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
       </set>
     </attachedChunks>
   </component>
