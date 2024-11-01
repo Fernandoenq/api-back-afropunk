@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b73d1b5-0126-404d-b803-d98de7c454f1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Application/Controllers/AuthenticationController.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Domain/Entities/Authentication.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Services/AuthenticationService.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Controllers/PersonController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Controllers/PersonController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Models/Request/PersonRequestModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Models/Request/PersonRequestModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Domain/Entities/Portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Domain/Entities/Portfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/scripts-sql/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/scripts-sql/script.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/Services/ImageService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services/ImageService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Services/PersonService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services/PersonService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Services/PortfolioService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services/PortfolioService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Services/SqsService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services/SqsService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Services/ValidationService.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Services/ValidationService.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
