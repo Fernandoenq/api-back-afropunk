@@ -1,7 +1,9 @@
 from datetime import datetime
 from Services.Models.Results.ValidationResult import ValidationResult
 from Application.Models.Request.PersonRequestModel import PersonRequestModel
-from Services.Services.PersonService import PersonService
+from Services.Services.AuthenticationService import AuthenticationService
+from Services.Services.ImageService import ImageService
+from Domain.Entities.Authentication import Authentication
 
 
 class ValidationService:
@@ -13,21 +15,10 @@ class ValidationService:
             result.add_error("Dados de requisição não enviados")
             return result
 
-        if person_request.cpf is not None:
-            person_df = PersonService().get_person_by_cpf(person_request.cpf, cursor)
-
-            if (person_df.empty is False
-                    and person_request.register_date is None
-                    and person_request.person_name is None
-                    and person_request.phone is None
-                    and person_request.birth_date is None
-                    and person_request.mail is None
-                    and person_request.has_accepted_participation is None):
-                return result
-
         if (person_request.register_date is None or person_request.person_name is None
                 or person_request.cpf is None or person_request.phone is None or person_request.birth_date is None
-                or person_request.mail is None or person_request.has_accepted_participation is None):
+                or person_request.mail is None or person_request.has_accepted_participation is None
+                or person_request.authentication_id is None):
             result.add_error("Dados de requisição não enviados")
             return result
 
@@ -35,14 +26,9 @@ class ValidationService:
             result.add_error("É necessário o compartilhamento dos dados para receber as imagens")
             return result
 
-        person_df = PersonService().get_person_by_cpf(person_request.cpf, cursor)
-        if person_df.empty is False:
-            result.add_error("Participante já consta no sistema. Não é necessário este cadastro")
-            return result
-
         cpf_validation = ValidationService.validate_cpf(person_request.cpf)
         if cpf_validation.is_valid is False:
-            result.add_errors(cpf_validation.errors)
+            result.add_error(cpf_validation.errors)
             return result
 
         """
@@ -52,6 +38,22 @@ class ValidationService:
                 result.add_errors(underage_validation.errors)
                 return result
         """
+
+        authentication_df = AuthenticationService().get_authentication_by_id(cursor, person_request.authentication_id)
+        if authentication_df.empty:
+            result.add_error("Não autorizado")
+            return result
+
+        authentication = Authentication()
+        if int(authentication_df[authentication.is_sent][0]) == 1:
+            result.add_error("As fotos solicitadas já foram enviadas")
+            return result
+
+        has_image_id = ImageService().has_image_id(cursor, person_request.image_ids)
+        if has_image_id is False:
+            result.add_error("As fotos solicitadas não estão mais disponíveis no sistema. "
+                             "Por favor, capture-as novamente.")
+            return result
 
         return result
 

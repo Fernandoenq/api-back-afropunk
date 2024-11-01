@@ -7,7 +7,7 @@ CREATE TABLE Person (
     Mail VARCHAR(100) NULL,
     RegisterDate TIMESTAMP NULL,
     HasAcceptedPromotion BINARY,
-    HasAcceptedParticipation BINARY,
+    HasAcceptedParticipation BINARY
 );
 
 CREATE TABLE Image (
@@ -18,12 +18,17 @@ CREATE TABLE Image (
     IsDeleted BINARY
 );
 
+CREATE TABLE Authentication (
+	AuthenticationId VARCHAR(500) PRIMARY KEY,
+    IsSent BINARY
+);
+
 CREATE TABLE Portfolio (
 	PortfolioId int AUTO_INCREMENT PRIMARY KEY,
 	ImageId varchar(100),
     PersonId int,
+    AuthenticationId VARCHAR(500),
     FOREIGN KEY (PersonId) REFERENCES Person(PersonId),
-    FOREIGN KEY (ImageId) REFERENCES Image(ImageId)
+    FOREIGN KEY (ImageId) REFERENCES Image(ImageId),
+    FOREIGN KEY (AuthenticationId) REFERENCES Authentication(AuthenticationId)
 );
-
-
