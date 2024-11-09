@@ -10,30 +10,33 @@ class AuthenticationController:
     def setup_controller(app):
         @app.route('/Authentication/GenerateAuthenticationId', methods=['POST'])
         def generate_authentication_id():
-            connection = ConnectionService.open_connection()
-            cursor = connection.cursor()
-            connection.start_transaction()
-
             try:
-                authentication_id = AuthenticationService().create_authentication(cursor)
+                connection = ConnectionService.open_connection()
+                cursor = connection.cursor()
+                connection.start_transaction()
 
-                if authentication_id is None:
-                    return jsonify(ErrorResponseModel(
-                        Errors=["Não foi possível gerar o AuthenticationId"]).dict()), 422
+                try:
+                    authentication_id = AuthenticationService().create_authentication(cursor)
 
-                connection.commit()
+                    if authentication_id is None:
+                        return jsonify(ErrorResponseModel(
+                            Errors=["Não foi possível gerar o AuthenticationId"]).dict()), 422
 
-                response_json = {
-                    "AuthenticationId": authentication_id
-                }
+                    connection.commit()
 
-                return jsonify(response_json), 200
+                    response_json = {
+                        "AuthenticationId": authentication_id
+                    }
 
+                    return jsonify(response_json), 200
+
+                except Exception as e:
+                    if connection.is_connected():
+                        connection.rollback()
+                    error_response = ErrorResponseModel(Errors=[f"{str(e)} | {traceback.format_exc()}"])
+                    return jsonify(error_response.dict()), 500
+                finally:
+                    if connection.is_connected():
+                        ConnectionService.close_connection(cursor, connection)
             except Exception as e:
-                if connection.is_connected():
-                    connection.rollback()
-                error_response = ErrorResponseModel(Errors=[f"{str(e)} | {traceback.format_exc()}"])
-                return jsonify(error_response.dict()), 500
-            finally:
-                if connection.is_connected():
-                    ConnectionService.close_connection(cursor, connection)
+                return jsonify('Erro servidor'), 500

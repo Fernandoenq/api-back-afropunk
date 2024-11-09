@@ -1,3 +1,8 @@
+DROP TABLE Portfolio;
+DROP TABLE Person;
+DROP TABLE Image;
+DROP TABLE Authentication;
+
 CREATE TABLE Person (
     PersonId int AUTO_INCREMENT PRIMARY KEY,
     PersonName VARCHAR(1000) NULL,
