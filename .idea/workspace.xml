@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5b73d1b5-0126-404d-b803-d98de7c454f1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Controllers/AuthenticationController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Controllers/AuthenticationController.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Controllers/ImageController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Controllers/ImageController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Controllers/PersonController.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Controllers/PersonController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/scripts-sql/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/scripts-sql/script.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +60,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
