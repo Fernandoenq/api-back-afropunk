@@ -10,27 +10,27 @@ class ImageController:
     def setup_controller(app):
         @app.route('/Image/Image', methods=['GET'])
         def get_image_ids():
-            #try:
-            connection = ConnectionService.open_connection()
-            cursor = connection.cursor()
-            connection.start_transaction()
-
             try:
-                image_ids = ImageService().get_image_ids(cursor)
+                connection = ConnectionService.open_connection()
+                cursor = connection.cursor()
+                connection.start_transaction()
 
-                response_json = {
-                    "image_ids": image_ids
-                }
+                try:
+                    image_ids = ImageService().get_image_ids(cursor)
 
-                return jsonify(response_json), 200
+                    response_json = {
+                        "image_ids": image_ids
+                    }
 
+                    return jsonify(response_json), 200
+
+                except Exception as e:
+                    if connection.is_connected():
+                        connection.rollback()
+                    error_response = ErrorResponseModel(Errors=[f"{str(e)} | {traceback.format_exc()}"])
+                    return jsonify(error_response.dict()), 500
+                finally:
+                    if connection.is_connected():
+                        ConnectionService.close_connection(cursor, connection)
             except Exception as e:
-                if connection.is_connected():
-                    connection.rollback()
-                error_response = ErrorResponseModel(Errors=[f"{str(e)} | {traceback.format_exc()}"])
-                return jsonify(error_response.dict()), 500
-            finally:
-                if connection.is_connected():
-                    ConnectionService.close_connection(cursor, connection)
-            #except Exception as e:
-            #    return jsonify('Erro servidor'), 500
+                return jsonify('Erro servidor'), 500
