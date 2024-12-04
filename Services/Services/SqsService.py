@@ -8,6 +8,7 @@ from Services.Services.AuthenticationService import AuthenticationService
 class SqsService:
     @staticmethod
     def send_message_to_sqs(cursor, phone: str, person_name: str, image_ids: List[str], authentication_id: int) -> bool:
+        """
         sqs_client = boto3.client(
             "sqs",
             aws_access_key_id=Configuration.aws_access_key_id,
@@ -31,7 +32,10 @@ class SqsService:
             print(f"Mensagem enviada com sucesso para {person_name} / {phone}."
                   f"ID da mensagem: {response['MessageId']}")
 
-            return AuthenticationService().set_authentication_sent(cursor, authentication_id)
+
+
         else:
             print(f"Falha ao enviar mensagem para {person_name} / {phone}.")
             return False
+        """
+        return AuthenticationService().set_authentication_sent(cursor, authentication_id)

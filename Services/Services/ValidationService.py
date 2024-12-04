@@ -46,7 +46,7 @@ class ValidationService:
 
         authentication = Authentication()
         if int(authentication_df[authentication.is_sent][0]) == 1:
-            result.add_error("As fotos solicitadas já foram enviadas")
+            result.add_error("As fotos solicitadas já foram baixadas")
             return result
 
         has_image_id = ImageService().has_image_id(cursor, person_request.image_ids)
