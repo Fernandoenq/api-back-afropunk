@@ -1,16 +1,20 @@
-from Domain.Entities.Person import Person
+from pydantic import BaseModel
+from typing import Optional
 
 
-class PersonRequestModel:
-    def __init__(self, person_request):
-        roulette_person = Person()
-        self.register_date = person_request[roulette_person.register_date]
-        self.person_name = person_request[roulette_person.person_name]
-        self.cpf = person_request[roulette_person.cpf]
-        self.phone = person_request[roulette_person.phone]
-        self.birth_date = person_request[roulette_person.birth_date]
-        self.mail = person_request[roulette_person.mail]
-        self.has_accepted_participation = person_request[roulette_person.has_accepted_participation]
-        self.has_accepted_promotion = person_request[roulette_person.has_accepted_promotion]
-        self.authentication_id = person_request['AuthenticationId']
-        self.image_ids = person_request["ImageIds"]
+class PersonRequestModel(BaseModel):
+    PersonName: Optional[str]
+    Cpf: str
+    Phone: Optional[str]
+    Mail: Optional[str]
+    HasAcceptedTerm: bool
+
+    @classmethod
+    def to_map(cls, json) -> "PersonRequestModel":
+        return cls(
+            PersonName=json.get('PersonName'),
+            Cpf=json.get('Cpf'),
+            Phone=json.get('Phone'),
+            Mail=json.get('Mail'),
+            HasAcceptedTerm=json.get('HasAcceptedTerm')
+        )

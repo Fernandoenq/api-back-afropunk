@@ -1,9 +1,13 @@
 from datetime import datetime
 from Services.Models.Results.ValidationResult import ValidationResult
 from Application.Models.Request.PersonRequestModel import PersonRequestModel
-from Services.Services.AuthenticationService import AuthenticationService
-from Services.Services.ImageService import ImageService
-from Domain.Entities.Authentication import Authentication
+from Application.Models.Request.ActivationRequestModel import ActivationRequestModel
+from Application.Models.Request.PersonExternalCodeRequestModel import PersonExternalCodeModel
+from Application.Models.Request.OrganizerLoginRequestModel import OrganizerLoginRequestModel
+from Services.Services.PersonService import PersonService
+from Services.Services.OrganizerService import OrganizerService
+from Domain.Entities.Person import Person
+import pandas as pd
 
 
 class ValidationService:
@@ -11,48 +15,59 @@ class ValidationService:
     def validate_register_person(person_request: PersonRequestModel, cursor) -> ValidationResult:
         result = ValidationResult()
 
+        person_df = PersonService().get_person_by_cpf(person_request.Cpf, cursor)
+        if person_df.empty is False:
+            result.add_error("Você já se cadastrou")
+            return result
+
         if person_request is None:
             result.add_error("Dados de requisição não enviados")
             return result
 
-        if (person_request.register_date is None or person_request.person_name is None
-                or person_request.cpf is None or person_request.phone is None or person_request.birth_date is None
-                or person_request.mail is None or person_request.has_accepted_participation is None
-                or person_request.authentication_id is None):
-            result.add_error("Dados de requisição não enviados")
+        if not person_request.HasAcceptedTerm:
+            result.add_error("É necessário aceitar o termo de responsabilidade e segurança de acordo com LGPD")
             return result
 
-        if not person_request.has_accepted_participation:
-            result.add_error("É necessário o compartilhamento dos dados para receber as imagens")
-            return result
-
-        cpf_validation = ValidationService.validate_cpf(person_request.cpf)
+        cpf_validation = ValidationService.validate_cpf(person_request.Cpf)
         if cpf_validation.is_valid is False:
-            result.add_error(cpf_validation.errors)
+            result.add_errors(cpf_validation.errors)
             return result
 
-        """
-        if person_request.birth_date is not None:
-            underage_validation = ValidationService.underage_verifier(person_request.birth_date)
-            if underage_validation.is_valid is False:
-                result.add_errors(underage_validation.errors)
-                return result
-        """
+        return result
 
-        authentication_df = AuthenticationService().get_authentication_by_id(cursor, person_request.authentication_id)
-        if authentication_df.empty:
-            result.add_error("Não autorizado")
+    @staticmethod
+    def validate_external_code(external_code_request: PersonExternalCodeModel, cursor) -> ValidationResult:
+        result = ValidationResult()
+
+        cpf_validation = ValidationService.validate_cpf(external_code_request.Cpf)
+        if cpf_validation.is_valid is False:
+            result.add_errors(cpf_validation.errors)
             return result
 
-        authentication = Authentication()
-        if int(authentication_df[authentication.is_sent][0]) == 1:
-            result.add_error("As fotos solicitadas já foram baixadas")
+        person_df = PersonService().get_person_by_cpf(external_code_request.Cpf, cursor)
+        if person_df.empty:
+            result.add_error("É necessário realizar o cadastro antes")
             return result
 
-        has_image_id = ImageService().has_image_id(cursor, person_request.image_ids)
-        if has_image_id is False:
-            result.add_error("As fotos solicitadas não estão mais disponíveis no sistema. "
-                             "Por favor, capture-as novamente.")
+        person = Person()
+        if pd.isna(person_df[person.external_code].iloc[0]) is False:
+            result.add_error("Um código ja foi definido para o participante")
+            return result
+
+        return result
+
+    @staticmethod
+    def validate_activation(cpf: str, cursor) -> ValidationResult:
+        result = ValidationResult()
+
+        cpf_validation = ValidationService.validate_cpf(cpf)
+        if cpf_validation.is_valid is False:
+            result.add_errors(cpf_validation.errors)
+            return result
+
+        person_df = PersonService().get_person_by_cpf(cpf, cursor)
+        if person_df.empty:
+            result.add_error("É necessário realizar o cadastro antes")
             return result
 
         return result
@@ -62,9 +77,6 @@ class ValidationService:
         result = ValidationResult()
 
         cpf = request_cpf
-
-        if cpf == '24624624624':
-            return result
 
         if len(cpf) != 11:
             result.add_error(f"CPF inválido! Este CPF possui {len(cpf)} dígitos")
@@ -97,6 +109,17 @@ class ValidationService:
         result = ValidationResult()
         if age < 18:
             result.add_error("De acordo com o regulamento da promoção, não é permitida a participação de menores.")
+            return result
+
+        return result
+
+    @staticmethod
+    def validate_login(login_request: OrganizerLoginRequestModel, cursor) -> ValidationResult:
+        result = ValidationResult()
+
+        organizer_df = OrganizerService().get_organizer_by_login(login_request.login, cursor)
+        if organizer_df.empty:
+            result.add_error("Dados incorretos")
             return result
 
         return result

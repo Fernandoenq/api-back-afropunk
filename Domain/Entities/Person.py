@@ -7,12 +7,13 @@ class Person:
         self.person_name = 'PersonName'
         self.cpf = 'Cpf'
         self.phone = 'Phone'
-        self.birth_date = 'BirthDate'
         self.mail = 'Mail'
         self.register_date = 'RegisterDate'
-        self.has_accepted_promotion = 'HasAcceptedPromotion'
         self.has_accepted_participation = 'HasAcceptedParticipation'
+        self.external_code = 'ExternalCode'
+        self.balance_current_value = 'BalanceCurrentValue'
 
         self.person_df = pd.DataFrame(columns=[self.person_id, self.person_name, self.cpf,
-                                               self.phone, self.birth_date, self.mail, self.register_date,
-                                               self.has_accepted_promotion, self.has_accepted_participation])
+                                               self.phone, self.mail, self.register_date,
+                                               self.has_accepted_participation, self.external_code,
+                                               self.balance_current_value])

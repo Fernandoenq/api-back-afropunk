@@ -1,29 +1,46 @@
+from botocore.exceptions import BotoCoreError, NoCredentialsError, PartialCredentialsError
+import uuid
+import os
+import boto3
+from werkzeug.datastructures import FileStorage
+from Application.Configuration import Configuration
 from typing import List
-import pandas as pd
-from Domain.Entities.Image import Image
+from Services.Services.PersonService import PersonService
+from Application.Models.Request.ActivationRequestModel import ActivationRequestModel
+from Domain.Entities.Person import Person
+from datetime import datetime
 
 
 class ImageService:
     @staticmethod
-    def get_image_ids(cursor) -> List[str]:
-        cursor.execute("SELECT ImageId FROM Image Where Active = 1 And IsDeleted = 0 ORDER BY RegisterDate DESC")
-        result = cursor.fetchall()
+    def save_image(file: FileStorage, file_name: str, cpf: str, cursor) -> bool:
+        person_df = PersonService.get_person_by_cpf(cpf, cursor)
+        person = Person()
+        person_id = int(person_df[person.person_id][0])
 
-        return [str(row[0]) for row in result]
+        try:
+            s3_client = boto3.client(
+                "s3",
+                aws_access_key_id=Configuration.aws_access_key_id,
+                aws_secret_access_key=Configuration.aws_secret_access_key,
+                region_name=Configuration.region_name
+            )
+
+            s3_client.upload_fileobj(file, Configuration.bucket_name, file_name)
+
+            cursor.execute("""INSERT INTO Image (ImageName, PersonId, RegisterDate) 
+                                VALUES (%s, %s, %s)""", (file_name, person_id, datetime.now()))
+
+            if cursor.rowcount <= 0:
+                return False
+
+            return True
+        except (BotoCoreError, NoCredentialsError, PartialCredentialsError) as e:
+            print(f"Erro ao fazer upload para o S3: {e}")
+            return False
 
     @staticmethod
-    def has_image_id(cursor, image_ids: List[str]) -> bool:
-        cursor.execute(
-            f"""SELECT ImageId 
-                    FROM Image 
-                    WHERE IsDeleted = 0 
-                    AND ImageId IN ({', '.join(['%s'] * len(image_ids))})""",
-            tuple(image_ids)
-        )
-        image_loaded = cursor.fetchall()
-
-        image = Image()
-        image_df = pd.DataFrame(image_loaded, columns=[image.image_id])
-
-        db_image_ids = set(image_df[image.image_id])
-        return db_image_ids >= set(image_ids)
+    def generate_external_file_id(file_name) -> str:
+        _, file_extension = os.path.splitext(file_name)
+        unique_id = str(uuid.uuid4())
+        return f"{unique_id}{file_extension}"
